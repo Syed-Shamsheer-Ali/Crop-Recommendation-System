@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crop Recommendation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: url('/static/Background_image.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .box {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px 25px;
+            border-radius: 12px;
+            max-width: 350px;
+            width: 90%;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-top: 10px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        input[type="submit"] {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #2e8b57;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #246f47;
+        }
+
+        h3 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 480px) {
+            .box {
+                padding: 20px 15px;
+            }
+
+            input[type="text"],
+            input[type="submit"] {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>Crop Recommendation System</h2>
+        <form action="/predict" method="post">
+            <label>Nitrogen (N):</label>
+            <input type="text" name="N">
+
+            <label>Phosphorus (P):</label>
+            <input type="text" name="P">
+
+            <label>Potassium (K):</label>
+            <input type="text" name="K">
+
+            <label>Temperature:</label>
+            <input type="text" name="Temperature">
+
+            <label>Humidity:</label>
+            <input type="text" name="Humidity">
+
+            <label>pH:</label>
+            <input type="text" name="pH_Value">
+
+            <label>Rainfall:</label>
+            <input type="text" name="Rainfall">
+
+            <input type="submit" value="Predict Crop">
+        </form>
+
+        {% if prediction_text %}
+            <h3>{{ prediction_text }}</h3>
+        {% endif %}
+    </div>
+</body>
+</html>
