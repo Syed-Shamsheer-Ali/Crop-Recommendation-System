@@ -8,7 +8,7 @@
         body {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: url('/static/Background_image.jpg') no-repeat center center fixed;
             background-size: cover;
             display: flex;
@@ -18,43 +18,53 @@
         }
 
         .box {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 30px 25px;
-            border-radius: 12px;
-            max-width: 350px;
-            width: 90%;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            background: rgba(255, 255, 255, 0.6); /* Transparent */
+            backdrop-filter: blur(8px); /* Frosted glass effect */
+            -webkit-backdrop-filter: blur(8px);
+            padding: 40px 50px;
+            border-radius: 14px;
+            width: 600px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
         }
 
         h2 {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            color: #2e8b57;
         }
 
         form {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px 30px;
+            color: #222;
         }
 
         label {
-            margin-top: 10px;
+            display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
         }
 
         input[type="text"] {
+            width: 100%;
             padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
+            border: 1px solid #aaa;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.85);
         }
 
         input[type="submit"] {
-            margin-top: 20px;
-            padding: 10px;
+            grid-column: 1 / -1;
+            padding: 12px;
             background-color: #2e8b57;
             color: white;
+            font-size: 16px;
+            font-weight: bold;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
         input[type="submit"]:hover {
@@ -63,17 +73,18 @@
 
         h3 {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 25px;
+            color: #222;
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 640px) {
             .box {
-                padding: 20px 15px;
+                width: 90%;
+                padding: 30px 20px;
             }
 
-            input[type="text"],
-            input[type="submit"] {
-                font-size: 16px;
+            form {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -82,27 +93,34 @@
     <div class="box">
         <h2>Crop Recommendation System</h2>
         <form action="/predict" method="post">
-            <label>Nitrogen (N):</label>
-            <input type="text" name="N">
-
-            <label>Phosphorus (P):</label>
-            <input type="text" name="P">
-
-            <label>Potassium (K):</label>
-            <input type="text" name="K">
-
-            <label>Temperature:</label>
-            <input type="text" name="Temperature">
-
-            <label>Humidity:</label>
-            <input type="text" name="Humidity">
-
-            <label>pH:</label>
-            <input type="text" name="pH_Value">
-
-            <label>Rainfall:</label>
-            <input type="text" name="Rainfall">
-
+            <div>
+                <label for="N">Nitrogen (N):</label>
+                <input type="text" name="N" placeholder="E.g. 0–140">
+            </div>
+            <div>
+                <label for="P">Phosphorus (P):</label>
+                <input type="text" name="P" placeholder="E.g. 5–145">
+            </div>
+            <div>
+                <label for="K">Potassium (K):</label>
+                <input type="text" name="K" placeholder="E.g. 5–205">
+            </div>
+            <div>
+                <label for="Temperature">Temperature (°C):</label>
+                <input type="text" name="Temperature" placeholder="E.g. 10–45°C">
+            </div>
+            <div>
+                <label for="Humidity">Humidity (%):</label>
+                <input type="text" name="Humidity" placeholder="E.g. 30–100%">
+            </div>
+            <div>
+                <label for="pH_Value">pH:</label>
+                <input type="text" name="pH_Value" placeholder="E.g. 4.5–9.5">
+            </div>
+            <div>
+                <label for="Rainfall">Rainfall (mm):</label>
+                <input type="text" name="Rainfall" placeholder="E.g. 20–300 mm">
+            </div>
             <input type="submit" value="Predict Crop">
         </form>
 
@@ -112,3 +130,4 @@
     </div>
 </body>
 </html>
+
