@@ -4,7 +4,6 @@ import pickle
 
 app = Flask(__name__)
 
-# Load the trained model and scalers
 with open('model.pkl', 'rb') as f:
     model = pickle.load(f)
 with open('minmaxscaler.pkl', 'rb') as f:
@@ -45,7 +44,6 @@ def home():
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
-        # Extract input features from form and convert to float
         features = []
         for feature_name in ['N', 'P', 'K', 'Temperature', 'Humidity', 'pH_Value', 'Rainfall']:
             val = request.form.get(feature_name, '').strip()
@@ -59,11 +57,8 @@ def predict():
 
         # Predict
         prediction_int = model.predict(scaled)[0]
-
-        # Map prediction to crop name
         crop_name = crop_labels.get(prediction_int, "Unknown crop")
 
-        # Capitalize crop name and display
         return render_template('index.html', prediction_text=f"Recommended Crop: {crop_name.capitalize()}")
 
     except Exception as e:
